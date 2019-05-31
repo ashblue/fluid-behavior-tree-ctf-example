@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace Adnc.FluidBT.Examples {
+namespace CleverCrow.Fluid.BTs.Examples {
     public class SpawnSpeedPowerup : MonoBehaviour {
         public GameObject speedBoostPrefab;
         

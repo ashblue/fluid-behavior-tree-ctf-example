@@ -1,10 +1,10 @@
 ﻿using System.Collections;
-using Adnc.FluidBT.Tasks;
-using Adnc.FluidBT.Trees;
+using CleverCrow.Fluid.BTs.Tasks;
+using CleverCrow.Fluid.BTs.Trees;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Adnc.FluidBT.Examples {
+namespace CleverCrow.Fluid.BTs.Examples {
 	public class FlagChaser : MonoBehaviour {
 		public NavMeshAgent agent;
 		public GameObject flagGraphic;

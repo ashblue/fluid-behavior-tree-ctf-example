@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Adnc.FluidBT.Examples {
+namespace CleverCrow.Fluid.BTs.Examples {
     public class FlagManager : MonoBehaviour {
         public static FlagManager current;
         
