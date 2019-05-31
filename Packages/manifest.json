@@ -1,5 +1,13 @@
 {
-  "registry": "https://registry.npmjs.org",
+  "scopedRegistries": [
+    {
+      "name": "NPM",
+      "url": "https://registry.npmjs.org",
+      "scopes": [
+        "com.fluid"
+      ]
+    }
+  ],
   "dependencies": {
     "com.fluid.behavior-tree": "2.0.1",
     "com.unity.ads": "2.0.8",
