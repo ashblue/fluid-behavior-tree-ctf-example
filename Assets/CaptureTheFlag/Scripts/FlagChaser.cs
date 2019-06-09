@@ -17,10 +17,12 @@ namespace CleverCrow.Fluid.BTs.Examples {
 		}
 
 		private Vector3 _origin;
-		private BehaviorTree _tree;
 		private bool _stun;
 		private bool _speedBoosted;
 		
+		[SerializeField]
+		private BehaviorTree _tree;
+
 		private GameObject SpeedBoost => FlagManager.current.speedBoost;
 		private GameObject Flag => FlagManager.current.flag;
 
@@ -33,12 +35,12 @@ namespace CleverCrow.Fluid.BTs.Examples {
 			_tree = new BehaviorTreeBuilder(gameObject)
 				.Selector()
 					.Condition(() => _stun)
-					.Sequence("Grab Speed Boost")
-						.Condition("Not Carrying Flag", () => Flag != gameObject)
+					.Sequence("Speed Boost")
+						.Condition("No Flag", () => Flag != gameObject)
 						.Condition("Not a Defender", () => !defender)
 						.Condition("Speed Boost Spawned", () => SpeedBoost != null)
-						.Condition("Not speed boosted", () => !_speedBoosted)
-						.Do(() => {
+						.Condition("Not boosted", () => !_speedBoosted)
+						.Do("Grab Powerup", () => {
 							agent.SetDestination(SpeedBoost.transform.position);
 		
 							if (Vector3.Distance(SpeedBoost.transform.position, transform.position) <= 1) {
@@ -49,7 +51,7 @@ namespace CleverCrow.Fluid.BTs.Examples {
 						})
 					.End()
 					.Sequence("Capture Flag")
-						.Condition("Not Carrying Flag", () => Flag != gameObject)
+						.Condition("No Flag", () => Flag != gameObject)
 						.Selector()
 							.Condition("Team Missing Flag", () => {
 								var character = Flag.GetComponent<FlagChaser>();
@@ -58,7 +60,7 @@ namespace CleverCrow.Fluid.BTs.Examples {
 							})
 							.Condition("Not a Defender", () => !defender)
 						.End()
-						.Do(() => {
+						.Do("Capture Flag", () => {
 							agent.SetDestination(Flag.transform.position);
 
 							if (Vector3.Distance(Flag.transform.position, transform.position) <= 1) {
@@ -70,7 +72,7 @@ namespace CleverCrow.Fluid.BTs.Examples {
 					.End()
 					.Sequence("Score")
 						.Condition("Has Flag", () => Flag == gameObject)
-						.Do(() => {
+						.Do("Seek Goal", () => {
 							agent.SetDestination(Goal.transform.position);
 					
 							if (Vector3.Distance(Goal.transform.position, transform.position) <= 2) {
